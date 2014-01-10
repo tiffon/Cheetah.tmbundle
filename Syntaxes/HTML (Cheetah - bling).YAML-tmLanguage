@@ -9,61 +9,61 @@ uuid: D57F1578-FC8B-4FA2-BFA3-2A789B511999
 
 patterns:
 - match: '##.*$'
-  name: comment.line.cheetah
+    name: comment.line.cheetah
 - begin: '#\*'
-  end: \*#
-  name: comment.block.cheetah
+    end: \*#
+    name: comment.block.cheetah
 - begin: ^(#cache)
-  beginCaptures:
-    '1': {name: support.other.directive.cheetah}
-  end: $
-  name: meta.directive.cache.cheetah
-  patterns:
-  - captures:
-      '1': {name: variable.parameter.cheetah}
-      '2': {name: entity.name.directive.cache.cheetah}
-    match: (id)='([a-zA-Z_][a-zA-Z0-9_]*)'
-    name: meta.directive.cache
-  - captures:
-      '1': {name: variable.parameter.cheetah}
-    match: (id|timer|test)=
-    name: meta.directive.cache
+    beginCaptures:
+        '1': {name: support.other.directive.cheetah}
+    end: $
+    name: meta.directive.cache.cheetah
+    patterns:
+    - captures:
+            '1': {name: variable.parameter.cheetah}
+            '2': {name: entity.name.directive.cache.cheetah}
+        match: (id)='([a-zA-Z_][a-zA-Z0-9_]*)'
+        name: meta.directive.cache
+    - captures:
+            '1': {name: variable.parameter.cheetah}
+        match: (id|timer|test)=
+        name: meta.directive.cache
 - begin: ^(#end cache)(.*)?
-  beginCaptures:
-    '1': {name: support.other.directive.cheetah}
-    '2': {name: entity.name.directive.cache.cheetah}
-  end: $
-  name: meta.directive.cache.cheetah
+    beginCaptures:
+        '1': {name: support.other.directive.cheetah}
+        '2': {name: entity.name.directive.cache.cheetah}
+    end: $
+    name: meta.directive.cache.cheetah
 - begin: (#(end )?(block|def|call))( [$a-zA-Z_\.][a-zA-Z0-9_\.]*)?
-  beginCaptures:
-    '1': {name: storage.type.cheetah}
-    '2': {name: support.other.cheetah}
-    '4': {name: entity.name.function.cheetah}
-  end: $
-  name: meta.declaration.cheetah
+    beginCaptures:
+        '1': {name: storage.type.cheetah}
+        '2': {name: support.other.cheetah}
+        '4': {name: entity.name.function.cheetah}
+    end: $
+    name: meta.declaration.cheetah
 - {match: '\$[a-zA-Z\_\.\-\s\d]*', name: variable.other.cheetah}
 - captures:
-    '1': {name: keyword.other.include.import.cheetah}
-    '2': {name: keyword.other.include.as.cheetah}
-    '3': {name: entity.name.function.cheetah}
-  match: ^(#import)\s+[a-zA-Z_\.\,][a-zA-Z0-9_\.\,]*\s+(as)?
-  name: meta.other.include.cheetah
+        '1': {name: keyword.other.include.import.cheetah}
+        '2': {name: keyword.other.include.as.cheetah}
+        '3': {name: entity.name.function.cheetah}
+    match: ^(#import)\s+[a-zA-Z_\.\,][a-zA-Z0-9_\.\,]*\s+(as)?
+    name: meta.other.include.cheetah
 - captures:
-    '1': {name: keyword.other.include.from.cheetah}
-    '2': {name: keyword.other.include.import.cheetah}
-    '3': {name: keyword.other.include.as.cheetah}
-  match: ^(#from)\s+[a-zA-Z_][a-zA-Z0-9_\.\,]*\s+(import)\s+[a-zA-Z_][a-zA-Z0-9_\,\.]*\s+(as)?
-  name: meta.other.include.cheetah
+        '1': {name: keyword.other.include.from.cheetah}
+        '2': {name: keyword.other.include.import.cheetah}
+        '3': {name: keyword.other.include.as.cheetah}
+    match: ^(#from)\s+[a-zA-Z_][a-zA-Z0-9_\.\,]*\s+(import)\s+[a-zA-Z_][a-zA-Z0-9_\,\.]*\s+(as)?
+    name: meta.other.include.cheetah
 - captures:
-    '1': {name: keyword.other.extends.cheetah}
-    '2': {name: entity.other.inherited-class}
-  match: ^(#extends)\s+([a-zA-Z_][a-zA-Z0-9_\.]*)
-  name: meta.other.extends.cheetah
+        '1': {name: keyword.other.extends.cheetah}
+        '2': {name: entity.other.inherited-class}
+    match: ^(#extends)\s+([a-zA-Z_][a-zA-Z0-9_\.]*)
+    name: meta.other.extends.cheetah
 - captures:
-    '1': {name: keyword.other.implements.cheetah}
-    '2': {name: entity.name.function.cheetah}
-  match: ^(#implements)\s+([a-zA-Z_][a-zA-Z0-9_]*)
-  name: meta.other.implements.cheetah
+        '1': {name: keyword.other.implements.cheetah}
+        '2': {name: entity.name.function.cheetah}
+    match: ^(#implements)\s+([a-zA-Z_][a-zA-Z0-9_]*)
+    name: meta.other.implements.cheetah
 - {match: '#(end )?(for|if|elif|repeat|try|unless|while)\b', name: keyword.control.cheetah}
 - {match: '#(end )?(raw)\b', name: keyword.other.cheetah}
 - {match: '#(assert|break|continue|else|except|finally|pass|raise|stop)\b', name: keyword.control.cheetah}
@@ -72,6 +72,6 @@ patterns:
 - {match: '#slurp', name: keyword.directive.cheetah}
 - {match: '^#((end )?(compiler-settings)|breakpoint)\b', name: support.other.directive.cheetah}
 - {
-    comment: Since html is valid in Cheetah templates include the html patterns, 
-    include: text.html.basic
-  }
+        comment: Since html is valid in Cheetah templates include the html patterns, 
+        include: text.html.basic
+    }
