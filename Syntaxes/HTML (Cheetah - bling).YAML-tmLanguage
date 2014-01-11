@@ -1,3 +1,4 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
 ---
 name: HTML (Cheetah - bling)
 fileTypes: [tmpl]
@@ -8,70 +9,99 @@ uuid: D57F1578-FC8B-4FA2-BFA3-2A789B511999
 # keyEquivalent: ^~h
 
 patterns:
-- match: '##.*$'
+-   match: '##.*$'
     name: comment.line.cheetah
-- begin: '#\*'
+-   begin: '#\*'
     end: \*#
     name: comment.block.cheetah
-- begin: ^(#cache)
+-   begin: ^(#cache)
     beginCaptures:
         '1': {name: support.other.directive.cheetah}
     end: $
     name: meta.directive.cache.cheetah
     patterns:
-    - captures:
+    -   captures:
             '1': {name: variable.parameter.cheetah}
             '2': {name: entity.name.directive.cache.cheetah}
         match: (id)='([a-zA-Z_][a-zA-Z0-9_]*)'
         name: meta.directive.cache
-    - captures:
+    -   captures:
             '1': {name: variable.parameter.cheetah}
         match: (id|timer|test)=
         name: meta.directive.cache
-- begin: ^(#end cache)(.*)?
+-   begin: ^(#end cache)(.*)?
     beginCaptures:
         '1': {name: support.other.directive.cheetah}
         '2': {name: entity.name.directive.cache.cheetah}
     end: $
     name: meta.directive.cache.cheetah
-- begin: (#(end )?(block|def|call))( [$a-zA-Z_\.][a-zA-Z0-9_\.]*)?
+-   begin: (#(end )?(block|def|call))( [$a-zA-Z_\.][a-zA-Z0-9_\.]*)?
     beginCaptures:
         '1': {name: storage.type.cheetah}
         '2': {name: support.other.cheetah}
         '4': {name: entity.name.function.cheetah}
     end: $
     name: meta.declaration.cheetah
-- {match: '\$[a-zA-Z\_\.\-\s\d]*', name: variable.other.cheetah}
-- captures:
+-   match: '\$[a-zA-Z\_\.\-\s\d]*'
+    name: variable.other.cheetah
+-   captures:
         '1': {name: keyword.other.include.import.cheetah}
         '2': {name: keyword.other.include.as.cheetah}
         '3': {name: entity.name.function.cheetah}
     match: ^(#import)\s+[a-zA-Z_\.\,][a-zA-Z0-9_\.\,]*\s+(as)?
     name: meta.other.include.cheetah
-- captures:
+-   captures:
         '1': {name: keyword.other.include.from.cheetah}
         '2': {name: keyword.other.include.import.cheetah}
         '3': {name: keyword.other.include.as.cheetah}
     match: ^(#from)\s+[a-zA-Z_][a-zA-Z0-9_\.\,]*\s+(import)\s+[a-zA-Z_][a-zA-Z0-9_\,\.]*\s+(as)?
     name: meta.other.include.cheetah
-- captures:
+-   captures:
         '1': {name: keyword.other.extends.cheetah}
         '2': {name: entity.other.inherited-class}
     match: ^(#extends)\s+([a-zA-Z_][a-zA-Z0-9_\.]*)
     name: meta.other.extends.cheetah
-- captures:
+-   captures:
         '1': {name: keyword.other.implements.cheetah}
         '2': {name: entity.name.function.cheetah}
     match: ^(#implements)\s+([a-zA-Z_][a-zA-Z0-9_]*)
     name: meta.other.implements.cheetah
-- {match: '#(end )?(for|if|elif|repeat|try|unless|while)\b', name: keyword.control.cheetah}
-- {match: '#(end )?(raw)\b', name: keyword.other.cheetah}
-- {match: '#(assert|break|continue|else|except|finally|pass|raise|stop)\b', name: keyword.control.cheetah}
-- {match: '#(attr|del|echo|filter|silent|super|return)\b', name: keyword.other.cheetah}
-- {match: '#set(\s+global)?', name: keyword.other.cheetah}
-- {match: '#slurp', name: keyword.directive.cheetah}
-- {match: '^#((end )?(compiler-settings)|breakpoint)\b', name: support.other.directive.cheetah}
-- {
-        comment: Since html is valid in Cheetah templates include the html patterns, 
-        include: text.html.basic
-    }
+-   match: '#(end )?(for|if|elif|repeat|try|unless|while)\b(.*)?$'
+    name: keyword.operator.django
+    # name: keyword.control.cheetah
+    captures:
+        '3': {name: string.unquoted.tag-string.django}
+# -   match: '#(end )?(for|if|elif|repeat|try|unless|while)\b'
+#     name: keyword.control.cheetah
+-   match: '#(end )?(raw)\b'
+    name: keyword.other.cheetah
+-   match: '#(assert|break|continue|else|except|finally|pass|raise|stop)\b'
+    name: keyword.control.cheetah
+-   match: '#(attr|del|echo|filter|silent|super|return)\b'
+    name: keyword.other.cheetah
+# -   match: '#set\s+(global\s+)?([\$a-zA-Z_][a-zA-Z0-9_]*)\s*(=)\s*(.*)$'
+-   begin: '#set\s+(global\s+)?([\$a-zA-Z_][a-zA-Z0-9_]*)\s*(=)\s*'
+    beginCaptures:
+        '0': {name: keyword.operator.django}
+        '2': {name: variable.parameter.django}
+    end: $
+    # name: keyword.operator.django
+    patterns:
+    -   include: source.python
+# -   match: '#set\s+(global\s+)?([\$a-zA-Z_][a-zA-Z0-9_]*)\s*(=)\s*'
+#     name: keyword.operator.django
+#     captures:
+#         '2': {name: variable.parameter.django}
+#         # '4': {name: string.unquoted.tag-string.django}
+#     patterns:
+#         include: source.python
+
+    # name: keyword.other.cheetah
+-   match: '#slurp'
+    name: keyword.directive.cheetah
+-   match: '^#((end )?(compiler-settings)|breakpoint)\b'
+    name: support.other.directive.cheetah
+-   comment: Since html is valid in Cheetah templates include the html patterns
+    include: text.html.basic
+-   comment: Since html is valid in Cheetah templates include the html patterns
+    include: source.python

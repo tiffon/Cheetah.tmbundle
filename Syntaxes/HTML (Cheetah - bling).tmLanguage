@@ -5,7 +5,6 @@
 	<key>fileTypes</key>
 	<array>
 		<string>tmpl</string>
-		<string>hm</string>
 	</array>
 	<key>name</key>
 	<string>HTML (Cheetah - bling)</string>
@@ -217,10 +216,18 @@
 			<string>meta.other.implements.cheetah</string>
 		</dict>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>string.unquoted.tag-string.django</string>
+				</dict>
+			</dict>
 			<key>match</key>
-			<string>#(end )?(for|if|elif|repeat|try|unless|while)\b</string>
+			<string>#(end )?(for|if|elif|repeat|try|unless|while)\b(.*)?$</string>
 			<key>name</key>
-			<string>keyword.control.cheetah</string>
+			<string>keyword.operator.django</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -241,10 +248,30 @@
 			<string>keyword.other.cheetah</string>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>#set(\s+global)?</string>
-			<key>name</key>
-			<string>keyword.other.cheetah</string>
+			<key>begin</key>
+			<string>#set\s+(global\s+)?([\$a-zA-Z_][a-zA-Z0-9_]*)\s*(=)\s*</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.django</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter.django</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>$</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.python</string>
+				</dict>
+			</array>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -263,6 +290,12 @@
 			<string>Since html is valid in Cheetah templates include the html patterns</string>
 			<key>include</key>
 			<string>text.html.basic</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Since html is valid in Cheetah templates include the html patterns</string>
+			<key>include</key>
+			<string>source.python</string>
 		</dict>
 	</array>
 	<key>scopeName</key>
